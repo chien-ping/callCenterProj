@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'tw.pchien.callCenterProj'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+apply plugin: 'application'
+
+mainClassName = 'Client'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Client'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
